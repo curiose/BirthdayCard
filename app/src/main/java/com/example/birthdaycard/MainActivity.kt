@@ -22,8 +22,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.birthdaycard.ui.theme.BirthdayCardTheme
- import androidx.compose.foundation.Image
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.Alignment.Companion.Center
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 
  class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,8 +39,8 @@ import androidx.compose.foundation.layout.Box
                     color = MaterialTheme.colorScheme.background
                 ) {
                     GreetingImage(
-                        message = "Happy Birthday Vic!",
-                        from = "From Julia",
+                        message = stringResource(R.string.happy_birthday_text),
+                        from = stringResource(R.string.signature_text),
                     )
                 }
             }
@@ -63,7 +66,7 @@ import androidx.compose.foundation.layout.Box
              fontSize = 36.sp,
              modifier = Modifier
                  .padding(16.dp)
-                 .align(alignment = Alignment.End)
+                 .align(alignment = Alignment.CenterHorizontally)
          )
      }
  }
@@ -75,13 +78,15 @@ import androidx.compose.foundation.layout.Box
          Image(
              painter = image,
              contentDescription = null,
+             contentScale = ContentScale.Crop,
+             alpha = 0.5F,
          )
          GreetingText(
              message = message,
              from = from,
              modifier = Modifier
-                .fillMaxSize()
-                .padding(8.dp)
+                 .fillMaxSize()
+                 .padding(8.dp)
          )
      }
  }
@@ -92,7 +97,8 @@ import androidx.compose.foundation.layout.Box
 fun BirthdayCardPreview() {
     BirthdayCardTheme {
         GreetingImage(
-            message = "Happy Birthday Vic!",
-            from = "From Julia")
+            message = stringResource(R.string.happy_birthday_text),
+            from = stringResource(R.string.signature_text),
+            )
     }
 }
