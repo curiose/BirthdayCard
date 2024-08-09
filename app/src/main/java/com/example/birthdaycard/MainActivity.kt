@@ -16,13 +16,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.birthdaycard.ui.theme.BirthdayCardTheme
+ import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 
-class MainActivity : ComponentActivity() {
+ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -32,10 +35,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingText(
+                    GreetingImage(
                         message = "Happy Birthday Vic!",
                         from = "From Julia",
-                        modifier = Modifier.padding(8.dp))
+                    )
                 }
             }
         }
@@ -65,12 +68,31 @@ class MainActivity : ComponentActivity() {
      }
  }
 
+ @Composable
+ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) {
+    val image = painterResource(R.drawable.androidparty)
+     Box(modifier) {
+         Image(
+             painter = image,
+             contentDescription = null,
+         )
+         GreetingText(
+             message = message,
+             from = from,
+             modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
+         )
+     }
+ }
+
 
 @Preview(showBackground = true)
 @Composable
 fun BirthdayCardPreview() {
     BirthdayCardTheme {
-        GreetingText(message = "Happy Birthday Vic!",
-                     from = "From Julia")
+        GreetingImage(
+            message = "Happy Birthday Vic!",
+            from = "From Julia")
     }
 }
